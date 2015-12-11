@@ -8,8 +8,9 @@ var Geo = require('../../../../client/js/app/components/common/geo.js');
 var Datepicker = require('../../../../client/js/app/components/common/datepicker.js');
 var ProjectUtils = require('../../../../client/js/app/utils/ProjectUtils.js');
 var Select = require('../../../../client/js/app/components/common/select.js');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers');
 
 var datetimeFormat = 'll h:mm A';
@@ -53,15 +54,15 @@ describe('components/common/filter_value_fields', function() {
 
       describe('Setting values datetime values', function () {
         it('properly sets the property_value from the date picker', function () {
-          this.component.refs['date-value-input'].refs.datepicker.getDOMNode().value = 'Jan 1, 2015';
-          TestUtils.Simulate.blur(this.component.refs['date-value-input'].refs.datepicker.getDOMNode());
+          ReactDOM.findDOMNode(this.component.refs['date-value-input'].refs.datepicker).value = 'Jan 1, 2015';
+          TestUtils.Simulate.blur(ReactDOM.findDOMNode(this.component.refs['date-value-input'].refs.datepicker));
           assert.strictEqual(
             moment(this.handleChangeStub.getCall(0).args[1]).format(datetimeFormat),
             "Jan 1, 2015 10:00 AM"
           );
         });
         it('properly sets the properly_value from the time picker', function () {
-          var inputNode = this.component.refs['time-value-input'].refs.timepicker.refs.input.getDOMNode();
+          var inputNode = ReactDOM.findDOMNode(this.component.refs['time-value-input'].refs.timepicker.refs.input);
           TestUtils.Simulate.focus(inputNode);
           inputNode.value = '03:47 PM';
           TestUtils.Simulate.blur(inputNode);
@@ -161,7 +162,7 @@ describe('components/common/filter_value_fields', function() {
           this.component.props.filter.property_name = 'stringProp';
           this.component.forceUpdate();
 
-          var coercionTypeSelect = TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0].getDOMNode();
+          var coercionTypeSelect = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0]);
           var coercionOptions = _.map(coercionTypeSelect.childNodes, function(node){
             return node.value;
           });
@@ -175,7 +176,7 @@ describe('components/common/filter_value_fields', function() {
       it('is true or false', function () {
         this.component.props.filter = { operator: 'exists', coercion_type: 'Boolean' };
         this.component.forceUpdate()
-        var boolPropValueSelect = this.component.refs['boolean-value-set'].getDOMNode().childNodes[0].childNodes[0];
+        var boolPropValueSelect = ReactDOM.findDOMNode(this.component.refs['boolean-value-set']).childNodes[0].childNodes[0];
 
         var boolPropValueSelectOptions = _.map(boolPropValueSelect.childNodes, function(node){
           return node.value;
