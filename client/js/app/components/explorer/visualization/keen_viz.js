@@ -3,7 +3,7 @@
  */
 
 var _ = require('lodash');
-var React = require('react/addons');
+var React = require('react');
 
 var ExplorerUtils = require('../../../utils/ExplorerUtils');
 
