@@ -2,8 +2,8 @@
 var assert = require('chai').assert;
 var sinon = require('sinon');
 var _ = require('lodash');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var Datepicker = require('../../../../client/js/app/components/common/datepicker.js');
 var TestHelpers = require('../../../support/TestHelpers');
 

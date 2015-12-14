@@ -30,5 +30,5 @@ describe('app', function() {
     QueryStringUtils.getQueryAttributes.restore();
     xhrOpenStub.restore();
     xhrSendStub.restore();
-  });   
+  });
 });

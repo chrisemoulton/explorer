@@ -2,8 +2,9 @@
 var sinon = require('sinon');
 var assert = require('chai').assert;
 var _ = require('lodash');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var FieldsToggle = require('../../../../client/js/app/components/common/fields_toggle.js');
 var TestHelpers = require('../../../support/TestHelpers');
 
@@ -30,7 +31,7 @@ describe('components/common/fields_toggle', function() {
                                                                   getFn={this.getFn} />);
     });
     it('displays the name prop', function(){
-      var nameDisplayed = this.component.refs['name'].getDOMNode().textContent;
+      var nameDisplayed = ReactDOM.findDOMNode(this.component.refs['name']).textContent;
       assert.strictEqual(nameDisplayed, 'Some Field');
     });
   });
@@ -44,7 +45,7 @@ describe('components/common/fields_toggle', function() {
                                                                   getFn={this.getFn} />);
     });
     it('displays the fields count prop', function(){
-      var nameDisplayed = this.component.refs['icon'].getDOMNode().textContent;
+      var nameDisplayed = ReactDOM.findDOMNode(this.component.refs['icon']).textContent;
       assert.strictEqual(nameDisplayed, '5');
     });
     it('doesnt call handleFieldsToggle when toggled', function(){
