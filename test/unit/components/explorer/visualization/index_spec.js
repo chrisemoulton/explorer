@@ -4,16 +4,17 @@ var _ = require('lodash');
 var sinon = require('sinon');
 var Visualization = require('../../../../../client/js/app/components/explorer/visualization/index.js');
 var Chart = require('../../../../../client/js/app/components/explorer/visualization/chart.js');
-var React = require('react/addons');
 var AppDispatcher = require('../../../../../client/js/app/dispatcher/AppDispatcher');
 var AppStateStore = require('../../../../../client/js/app/stores/AppStateStore');
 var ExplorerUtils = require('../../../../../client/js/app/utils/ExplorerUtils');
 var ExplorerConstants = require('../../../../../client/js/app/constants/ExplorerConstants');
 var ExplorerActions = require('../../../../../client/js/app/actions/ExplorerActions');
 var NoticeActions = require('../../../../../client/js/app/actions/NoticeActions');
-var TestUtils = React.addons.TestUtils;
 var TestHelpers = require('../../../../support/TestHelpers');
-var $R = require('rquery')(_, React);
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 
 describe('components/explorer/visualization/index', function() {
   beforeEach(function() {

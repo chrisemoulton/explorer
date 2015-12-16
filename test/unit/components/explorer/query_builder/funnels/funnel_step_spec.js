@@ -1,9 +1,10 @@
 var _ = require('lodash');
 var sinon = require('sinon');
 var assert = require('chai').assert;
-var React = require('react/addons');
-var $R = require('rquery')(_, React);
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 var TestHelpers = require('../../../../../support/TestHelpers');
 var FunnelStep = require('../../../../../../client/js/app/components/explorer/query_builder/funnels/funnel_step.js');
 

@@ -11,7 +11,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers');
-var $R = require('rquery')(_, React);
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 
 describe('components/common/filter', function() {
   beforeEach(function() {

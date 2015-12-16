@@ -2,11 +2,12 @@
 var assert = require('chai').assert;
 var sinon = require('sinon');
 var _ = require('lodash');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var QueryActions = require('../../../../client/js/app/components/explorer/query_actions.js');
 var TestHelpers = require('../../../support/TestHelpers');
-var $R = require('rquery')(_, React);
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 
 describe('components/explorer/query_actions', function() {
 

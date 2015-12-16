@@ -2,8 +2,9 @@ var sinon = require('sinon');
 var assert = require('chai').assert;
 var _ = require('lodash');
 var React = require('react');
+var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
-var $R = require('rquery')(_, React);
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 var TestHelpers = require('../../../support/TestHelpers.js');
 var FilterManager = require('../../../../client/js/app/components/common/filter_manager.js');
 

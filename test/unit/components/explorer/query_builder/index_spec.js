@@ -11,10 +11,12 @@ var ExplorerActions = require('../../../../../client/js/app/actions/ExplorerActi
 var Input = require('../../../../../client/js/app/components/common/select.js');
 var ExtractionOptions = require('../../../../../client/js/app/components/explorer/query_builder/extraction_options.js');
 var ReactSelect = require('../../../../../client/js/app/components/common/react_select.js');
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var TestUtils = React.addons.TestUtils;
 var TestHelpers = require('../../../../support/TestHelpers');
-var $R = require('rquery')(_, React);
+
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 
 describe('components/explorer/query_builder/index', function() {
   beforeEach(function() {

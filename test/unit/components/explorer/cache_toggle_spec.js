@@ -5,10 +5,11 @@ var _ = require('lodash');
 var Explorer = require('../../../../client/js/app/components/explorer/index.js');
 var CacheToggle = require('../../../../client/js/app/components/explorer/cache_toggle.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers.js');
-var $R = require('rquery')(_, React);
+var $R = require('rquery')(_, React, ReactDOM, TestUtils);
 
 describe('components/explorer/cache_toggle', function() {
   beforeEach(function() {
