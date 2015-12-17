@@ -109,7 +109,7 @@ describe('components/common/filter_value_fields', function() {
 
     describe('Geo', function () {
       beforeEach(function () {
-        this.component.props.filter = { 
+        this.component.setProps({ filter: {
           property_name: 'geoProp',
           coercion_type: 'Geo',
           operator: 'within',
@@ -117,7 +117,7 @@ describe('components/common/filter_value_fields', function() {
             coordinates: [],
             max_distance_miles: null
           }
-        };
+        }});
         sinon.stub(ProjectUtils, 'getPropertyType');
         this.component.forceUpdate();
       });
@@ -137,7 +137,7 @@ describe('components/common/filter_value_fields', function() {
 
     describe('not Boolean or Datetime or Null', function() {
       beforeEach(function(){
-        this.component.props.filter.coercion_type = 'String';
+        this.component.setProps({ filter: { coercion_type: 'String' } });
         this.component.forceUpdate();
       });
 
@@ -159,10 +159,12 @@ describe('components/common/filter_value_fields', function() {
         it('has all the coercion types', function () {
           var defaultCoercionOptions = ['String', 'Number', 'Null', 'List', 'Boolean', 'Datetime']
 
-          this.component.props.filter.property_name = 'stringProp';
+          this.component.setProps({ filter: { property_name: 'stringProp' } });
+          console.log(this.component.props);
           this.component.forceUpdate();
 
           var coercionTypeSelect = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0]);
+          console.log(coercionTypeSelect);
           var coercionOptions = _.map(coercionTypeSelect.childNodes, function(node){
             return node.value;
           });
@@ -174,8 +176,11 @@ describe('components/common/filter_value_fields', function() {
     });
     describe('available property value options when Boolean', function () {
       it('is true or false', function () {
-        this.component.props.filter = { operator: 'exists', coercion_type: 'Boolean' };
+        this.component.setProps({ filter: {
+          operator: 'exists', coercion_type: 'Boolean' }
+        });
         this.component.forceUpdate()
+
         var boolPropValueSelect = ReactDOM.findDOMNode(this.component.refs['boolean-value-set']).childNodes[0].childNodes[0];
 
         var boolPropValueSelectOptions = _.map(boolPropValueSelect.childNodes, function(node){

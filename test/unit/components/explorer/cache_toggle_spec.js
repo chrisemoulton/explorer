@@ -38,7 +38,7 @@ describe('components/explorer/cache_toggle', function() {
 
   describe('enable caching checkbox', function() {
     it('allows user to enable caching if refresh_rate is 0', function() {
-      var checkboxLabel = $R(this.component).find('[htmlFor="cache"]');
+      var checkboxLabel = $R(this.component).find('label[for="cache"]');
 
       assert.equal(checkboxLabel.text(), 'Enable caching');
     })
@@ -46,8 +46,9 @@ describe('components/explorer/cache_toggle', function() {
     it('allows user to turn off caching if refresh_rate is not 0', function() {
       this.model.refresh_rate = 14400;
       this.component.forceUpdate();
+      var checkboxLabel = $R(this.component).find('label[for="cache"]');
 
-      assert.equal($R(this.component).find('[htmlFor="cache"]').text(), 'Caching enabled');
+      assert.equal(checkboxLabel.text(), 'Caching enabled');
     });
   });
 
