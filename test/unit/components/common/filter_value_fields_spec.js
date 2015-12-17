@@ -159,12 +159,10 @@ describe('components/common/filter_value_fields', function() {
         it('has all the coercion types', function () {
           var defaultCoercionOptions = ['String', 'Number', 'Null', 'List', 'Boolean', 'Datetime']
 
-          this.component.setProps({ filter: { property_name: 'stringProp' } });
-          console.log(this.component.props);
+          this.component.props.filter = { property_name: 'stringProp' };
           this.component.forceUpdate();
 
           var coercionTypeSelect = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0]);
-          console.log(coercionTypeSelect);
           var coercionOptions = _.map(coercionTypeSelect.childNodes, function(node){
             return node.value;
           });
