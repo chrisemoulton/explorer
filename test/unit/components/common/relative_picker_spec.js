@@ -5,8 +5,8 @@ var sinon = require('sinon');
 var RelativePicker = require('../../../../client/js/app/components/common/relative_picker.js');
 var ProjectUtils = require('../../../../client/js/app/utils/ProjectUtils');
 var ExplorerActions = require('../../../../client/js/app/actions/ExplorerActions');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers');
 
 describe('components/common/relative_picker', function() {

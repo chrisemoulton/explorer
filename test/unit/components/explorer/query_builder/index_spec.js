@@ -13,7 +13,7 @@ var ExtractionOptions = require('../../../../../client/js/app/components/explore
 var ReactSelect = require('../../../../../client/js/app/components/common/react_select.js');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../../support/TestHelpers');
 
 var $R = require('rquery')(_, React, ReactDOM, TestUtils);

@@ -4,7 +4,7 @@ var assert = require('chai').assert;
 var _ = require('lodash');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 var Modal = require('../../../../client/js/app/components/common/modal.js');
 
 describe('components/common/modal', function() {

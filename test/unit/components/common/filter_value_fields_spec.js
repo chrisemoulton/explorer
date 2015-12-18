@@ -45,7 +45,8 @@ describe('components/common/filter_value_fields', function() {
       beforeEach(function(){
         this.filter.coercion_type = 'Datetime';
         this.filter.property_value = 'May 15, 2015 10:00 AM';
-        this.component.setProps({ filter: this.filter });
+        var props = _.assign({}, this.component.props, {filter: this.filter});
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
       });
 
       it('has a Datetime component', function(){
@@ -76,8 +77,8 @@ describe('components/common/filter_value_fields', function() {
 
     describe('Boolean', function() {
       beforeEach(function(){
-        this.component.props.filter.coercion_type = 'Boolean';
-        this.component.forceUpdate();
+        var props = _.assign({}, this.component.props, { filter: { coercion_type: 'Boolean' } });
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
       });
 
       it('has a Select component', function(){
@@ -91,25 +92,28 @@ describe('components/common/filter_value_fields', function() {
 
     describe('Null', function () {
       beforeEach(function () {
-        this.component.props.filter.coercion_type = 'Null';
-        this.component.forceUpdate();
+        var props = _.assign({}, this.component.props, { filter: { coercion_type: 'Null' } });
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
+      });
+
+      it('has one input', function() {
         assert.lengthOf(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'input'), 1);
       });
 
       it('has a readonly input', function () {
         var input = TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'input')[0];
-        assert.isTrue(input.props.readOnly);
+        assert.isTrue(input.readOnly);
       });
 
       it('the input value has a placeholder of \'null\'', function () {
         var input = TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'input')[0];
-        assert.equal(input.props.placeholder, 'Null');
+        assert.equal(input.placeholder, 'Null');
       });
     });
 
     describe('Geo', function () {
       beforeEach(function () {
-        this.component.setProps({ filter: {
+        var props = _.assign({}, this.component.props, { filter: {
           property_name: 'geoProp',
           coercion_type: 'Geo',
           operator: 'within',
@@ -118,8 +122,8 @@ describe('components/common/filter_value_fields', function() {
             max_distance_miles: null
           }
         }});
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
         sinon.stub(ProjectUtils, 'getPropertyType');
-        this.component.forceUpdate();
       });
 
       afterEach(function () {
@@ -137,8 +141,10 @@ describe('components/common/filter_value_fields', function() {
 
     describe('not Boolean or Datetime or Null', function() {
       beforeEach(function(){
-        this.component.setProps({ filter: { coercion_type: 'String' } });
-        this.component.forceUpdate();
+        var props = _.assign({}, this.component.props, {
+          filter: { coercion_type: 'String' }
+        });
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
       });
 
       it('does not have a Datetime component', function(){
@@ -159,8 +165,10 @@ describe('components/common/filter_value_fields', function() {
         it('has all the coercion types', function () {
           var defaultCoercionOptions = ['String', 'Number', 'Null', 'List', 'Boolean', 'Datetime']
 
-          this.component.props.filter = { property_name: 'stringProp' };
-          this.component.forceUpdate();
+          var props = _.assign({}, this.component.props, {
+            filter: { operator: 'eq' }
+          });
+          this.component = TestHelpers.renderComponent(FilterValueFields, props);
 
           var coercionTypeSelect = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0]);
           var coercionOptions = _.map(coercionTypeSelect.childNodes, function(node){
@@ -174,10 +182,10 @@ describe('components/common/filter_value_fields', function() {
     });
     describe('available property value options when Boolean', function () {
       it('is true or false', function () {
-        this.component.setProps({ filter: {
-          operator: 'exists', coercion_type: 'Boolean' }
+        var props = _.assign({}, this.component.props, {
+          filter: { operator: 'exists', coercion_type: 'Boolean' }
         });
-        this.component.forceUpdate()
+        this.component = TestHelpers.renderComponent(FilterValueFields, props);
 
         var boolPropValueSelect = ReactDOM.findDOMNode(this.component.refs['boolean-value-set']).childNodes[0].childNodes[0];
 

@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 var React = require('react');
 var _ = require('lodash');
 var sinon = require('sinon');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers');
 
 var ExplorerActions = require('../../../../client/js/app/actions/ExplorerActions');

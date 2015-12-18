@@ -10,8 +10,8 @@ var AbsolutePicker = require('../../../../client/js/app/components/common/absolu
 var ReactSelect = require('../../../../client/js/app/components/common/react_select.js');
 var FieldsToggle = require('../../../../client/js/app/components/common/fields_toggle.js');
 var ExplorerActions = require('../../../../client/js/app/actions/ExplorerActions');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var TestHelpers = require('../../../support/TestHelpers');
 
 describe('components/common/timeframe', function() {
