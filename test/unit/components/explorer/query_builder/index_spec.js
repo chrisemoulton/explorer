@@ -55,9 +55,9 @@ describe('components/explorer/query_builder/index', function() {
 
     it('has zero Interval components if the analysis_type is extraction', function(){
       this.model.query.analysis_type = 'extraction';
-      this.component.setProps({
-        model: this.model
-      });
+      var props = _.assign({}, this.component.props, { model: this.model });
+      this.component = TestHelpers.renderComponent(QueryBuilder, props);
+
       assert.lengthOf(TestUtils.scryRenderedComponentsWithType(this.component, Interval), 0);
     });
 
@@ -79,7 +79,7 @@ describe('components/explorer/query_builder/index', function() {
       it('calls clearQuery when the clear query button is clicked', function () {
         var stub = sinon.stub();
         this.component = this.renderComponent({ handleClearQuery: stub });
-        TestUtils.Simulate.click($R(this.component).find('[role="clear-query"]').components[0].getDOMNode());
+        TestUtils.Simulate.click($R(this.component).find('[role="clear-query"]').components[0]);
         assert.isTrue(stub.calledOnce);
       });
     });
@@ -152,7 +152,7 @@ describe('components/explorer/query_builder/index', function() {
       it('calls handleQuerySubmit prop function when the form is submitted', function () {
         var submitStub = sinon.stub();
         this.component = this.renderComponent({ handleQuerySubmit: submitStub });
-        var formSubmitNode = TestUtils.findRenderedDOMComponentWithTag(this.component, 'form').getDOMNode();
+        var formSubmitNode = TestUtils.findRenderedDOMComponentWithTag(this.component, 'form');
         TestUtils.Simulate.submit(formSubmitNode);
         assert.isTrue(submitStub.calledOnce);
       });
@@ -172,7 +172,7 @@ describe('components/explorer/query_builder/index', function() {
 
     describe('event_collection', function () {
       it('tries to update the attribute when the field changes', function() {
-        var node = $R(this.component).find('input[name="event_collection"]').components[0].getDOMNode();
+        var node = $R(this.component).find('input[name="event_collection"]').components[0];
         node.value = 'clicks';
         TestUtils.Simulate.change(node);
 
@@ -182,7 +182,7 @@ describe('components/explorer/query_builder/index', function() {
     });
     describe('analysis_type', function () {
       it('tries to update the attribute when the field changes', function() {
-        var node = $R(this.component).find('input[name="analysis_type"]').components[0].getDOMNode();
+        var node = $R(this.component).find('input[name="analysis_type"]').components[0];
         node.value = 'count';
         TestUtils.Simulate.change(node);
 
@@ -196,7 +196,7 @@ describe('components/explorer/query_builder/index', function() {
         this.model.query.analysis_type = 'sum';
         this.component.forceUpdate();
 
-        var node = $R(this.component).find('input[name="target_property"]').components[0].getDOMNode();
+        var node = $R(this.component).find('input[name="target_property"]').components[0];
         node.value = 'target';
         TestUtils.Simulate.change(node);
 
@@ -210,7 +210,7 @@ describe('components/explorer/query_builder/index', function() {
         this.model.query.analysis_type = 'percentile';
         this.component.forceUpdate();
 
-        var node = $R(this.component).find('input[name="percentile"]').components[0].getDOMNode();
+        var node = $R(this.component).find('input[name="percentile"]').components[0];
         node.value = '10';
         TestUtils.Simulate.change(node);
 
@@ -225,7 +225,7 @@ describe('components/explorer/query_builder/index', function() {
         this.model.query.group_by = 'group_by_property';
         this.component.forceUpdate();
 
-        var node = $R(this.component).find('input[name="group_by"]').components[0].getDOMNode();
+        var node = $R(this.component).find('input[name="group_by"]').components[0];
         node.value = 'new_group_by_property';
         TestUtils.Simulate.change(node);
 

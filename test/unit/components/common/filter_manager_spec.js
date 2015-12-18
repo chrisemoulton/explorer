@@ -22,9 +22,10 @@ function defaultProps() {
 
 describe('components/common/filter_manager', function() {
   it('has a message telling the user to choose an event collection is one is not set', function(){
-    var component = TestHelpers.renderComponent(FilterManager, defaultProps);
+    var component = TestHelpers.renderComponent(FilterManager, defaultProps());
     var message = 'Please select an Event Collection before making a filter.';
-    assert.equal(message, TestUtils.findRenderedDOMComponentWithClass(component, 'no-filters-msg').getDOMNode().textContent);
+
+    assert.equal(message, TestUtils.findRenderedDOMComponentWithClass(component, 'no-filters-msg').textContent);
   });
   it("no longer shows the message when an event collection is set", function() {
     var component = TestHelpers.renderComponent(FilterManager, _.assign(defaultProps(), {
