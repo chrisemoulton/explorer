@@ -49,8 +49,8 @@ describe('components/common/modal', function() {
         classes: 'btn-primary'
       }]} />);
 
-      var defaultButton = ReactDOM.findDOMNode(TestUtils.findRenderedDOMComponentWithClass(modal, 'btn-default'));
-      var primaryButton = ReactDOM.findDOMNode(TestUtils.findRenderedDOMComponentWithClass(modal, 'btn-primary'));
+      var defaultButton = TestUtils.findRenderedDOMComponentWithClass(modal, 'btn-default');
+      var primaryButton = TestUtils.findRenderedDOMComponentWithClass(modal, 'btn-primary');
 
       TestUtils.Simulate.click(primaryButton);
 

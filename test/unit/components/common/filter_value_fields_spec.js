@@ -55,15 +55,15 @@ describe('components/common/filter_value_fields', function() {
 
       describe('Setting values datetime values', function () {
         it('properly sets the property_value from the date picker', function () {
-          ReactDOM.findDOMNode(this.component.refs['date-value-input'].refs.datepicker).value = 'Jan 1, 2015';
-          TestUtils.Simulate.blur(ReactDOM.findDOMNode(this.component.refs['date-value-input'].refs.datepicker));
+          this.component.refs['date-value-input'].refs.datepicker.value = 'Jan 1, 2015';
+          TestUtils.Simulate.blur(this.component.refs['date-value-input'].refs.datepicker);
           assert.strictEqual(
             moment(this.handleChangeStub.getCall(0).args[1]).format(datetimeFormat),
             "Jan 1, 2015 10:00 AM"
           );
         });
         it('properly sets the properly_value from the time picker', function () {
-          var inputNode = ReactDOM.findDOMNode(this.component.refs['time-value-input'].refs.timepicker.refs.input);
+          var inputNode = this.component.refs['time-value-input'].refs.timepicker.refs.input;
           TestUtils.Simulate.focus(inputNode);
           inputNode.value = '03:47 PM';
           TestUtils.Simulate.blur(inputNode);
@@ -170,7 +170,7 @@ describe('components/common/filter_value_fields', function() {
           });
           this.component = TestHelpers.renderComponent(FilterValueFields, props);
 
-          var coercionTypeSelect = ReactDOM.findDOMNode(TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0]);
+          var coercionTypeSelect = TestUtils.scryRenderedDOMComponentsWithTag(this.component, 'select')[0];
           var coercionOptions = _.map(coercionTypeSelect.childNodes, function(node){
             return node.value;
           });

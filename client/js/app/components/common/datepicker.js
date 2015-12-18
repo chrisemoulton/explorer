@@ -4,7 +4,6 @@
 
 var _ = require('lodash');
 var React = require('react');
-var ReactDOM = require('react-dom');
 var moment = require('moment');
 
 var pickadate = require('../../../vendor/picker.js');
@@ -28,18 +27,18 @@ var Datepicker = React.createClass({
 
   onFocus: function() {
     var minimum = this.props.minimum;
-    $(ReactDOM.findDOMNode(this.refs[this.props.refValue])).pickadate({
+    $(this.refs[this.props.refValue]).pickadate({
       format: 'mmm d, yyyy',
       editable: true,
       min: minimum,
       onSet: _.bind(function(args) {
-        this.props.onSet(this.props.name, new Date(ReactDOM.findDOMNode(this.refs.datepicker).value));
+        this.props.onSet(this.props.name, new Date(this.refs.datepicker.value));
       }, this)
     });
   },
 
   destroyPicker: function() {
-    var picker = $(ReactDOM.findDOMNode(this.refs[this.props.refValue])).pickadate('picker');
+    var picker = $(this.refs[this.props.refValue]).pickadate('picker');
     if (picker) picker.stop();
   },
 

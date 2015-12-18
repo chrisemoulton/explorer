@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 
 /* TODO:
 [ ] resting state (selection/empty)
@@ -67,7 +66,7 @@ var ReactSelect = React.createClass({
     if (this.state.visible) {
       newState['limit'] = 30;
       newState['selectedItem'] = 0;
-      ReactDOM.findDOMNode(this.refs.scrollpane).scrollTop = 0;
+      this.refs.scrollpane.scrollTop = 0;
     }
     else {
       newState['visible'] = true;
@@ -75,7 +74,7 @@ var ReactSelect = React.createClass({
     this.setState(newState);
     this.props.handleChange(
       this.props.name,
-      ReactDOM.findDOMNode(this.refs.input).value
+      this.refs.input.value
     );
   },
 
@@ -92,7 +91,7 @@ var ReactSelect = React.createClass({
   },
 
   handleBlur: function(e) {
-    if (this.refs.scrollpane && e.relatedTarget !== ReactDOM.findDOMNode(this.refs.scrollpane)) {
+    if (this.refs.scrollpane && e.relatedTarget !== this.refs.scrollpane) {
       if (!this.state.visible) e.preventDefault();
       this.resetTimeout = setTimeout(this.resetState, 100);
       this.blurTimeout = setTimeout(this.props.handleBlur(e), 100);
@@ -108,7 +107,7 @@ var ReactSelect = React.createClass({
     if (typeof this.props.items[index]) {
       var selection = String(this.props.items[index]);
       this.setState({ initialFocus: false });
-      ReactDOM.findDOMNode(this.refs.input).focus();
+      this.refs.input.focus();
       this.resetState();
       this.props.handleChange(this.props.name, selection);
       this.props.handleSelection(this.props.name, selection);
@@ -123,7 +122,7 @@ var ReactSelect = React.createClass({
     this.setState({ visible: true });
 
     if (this.refs.list && this.state.selectedItem) {
-      itemHeight = ReactDOM.findDOMNode(this.refs.list).children[this.state.selectedItem].scrollHeight + 1;
+      itemHeight = this.refs.list.children[this.state.selectedItem].scrollHeight + 1;
       itemOffset = itemHeight * this.state.selectedItem;
     }
 
@@ -141,19 +140,19 @@ var ReactSelect = React.createClass({
       if (this.state.selectedItem-1 >= 0) {
         newState['selectedItem'] = this.state.selectedItem-1;
         if (list) {
-          newState['focusedItem'] = ReactDOM.findDOMNode(list).children[this.state.selectedItem-1].innerHTML;
+          newState['focusedItem'] = list.children[this.state.selectedItem-1].innerHTML;
         }
       }
       else {
         newState['selectedItem'] = 0;
         if (list) {
-          newState['focusedItem'] = ReactDOM.findDOMNode(list).children[0].innerHTML;
+          newState['focusedItem'] = list.children[0].innerHTML;
         }
       }
       this.setState(newState);
 
       if (list && itemOffset > itemHeight*3) {
-        ReactDOM.findDOMNode(this.refs.scrollpane).scrollTop -= itemHeight;
+        this.refs.scrollpane.scrollTop -= itemHeight;
       }
       e.preventDefault();
     },
@@ -165,19 +164,19 @@ var ReactSelect = React.createClass({
       if (this.state.selectedItem+1 < this.visibleItems) {
         newState['selectedItem'] = this.state.selectedItem+1;
         if (list) {
-          newState['focusedItem'] = ReactDOM.findDOMNode(this.refs.list).children[this.state.selectedItem+1].innerHTML;
+          newState['focusedItem'] = this.refs.list.children[this.state.selectedItem+1].innerHTML;
         }
       }
       else {
         newState['selectedItem'] = this.visibleItems-1;
         if (list) {
-          newState['focusedItem'] = ReactDOM.findDOMNode(list).children[this.visibleItems-1].innerHTML;
+          newState['focusedItem'] = list.children[this.visibleItems-1].innerHTML;
         }
       }
       this.setState(newState);
 
       if (list && itemOffset > itemHeight*3) {
-        ReactDOM.findDOMNode(this.refs.scrollpane).scrollTop += itemHeight;
+        this.refs.scrollpane.scrollTop += itemHeight;
       }
       e.preventDefault();
     },
@@ -185,7 +184,7 @@ var ReactSelect = React.createClass({
     "Enter": function(e, itemHeight, itemOffset) {
       var list = this.refs.list;
       if (list) {
-        var childNode = ReactDOM.findDOMNode(list).children[this.state.selectedItem];
+        var childNode = list.children[this.state.selectedItem];
         if (childNode) this.handleItemSelection( childNode.getAttribute('data-index') );
       }
       else {
@@ -202,7 +201,7 @@ var ReactSelect = React.createClass({
   },
 
   handleScroll: function(e) {
-    var pane = ReactDOM.findDOMNode(this.refs.scrollpane);
+    var pane = this.refs.scrollpane;
     var diff = pane.scrollHeight - pane.scrollTop - 200;
       // -200 offset is a hack to account for fixed height
     if (diff < 50) {

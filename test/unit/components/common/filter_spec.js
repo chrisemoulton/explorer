@@ -50,7 +50,7 @@ describe('components/common/filter', function() {
     // TODO: Remove
     this.getSelectOptions = function(selectClass, activeOnly) {
       activeOnly = activeOnly || false;
-      var operatorSelect = ReactDOM.findDOMNode(TestUtils.findRenderedDOMComponentWithClass(this.component, selectClass)).childNodes[0];
+      var operatorSelect = TestUtils.findRenderedDOMComponentWithClass(this.component, selectClass).childNodes[0];
       var operators = _.map(operatorSelect.childNodes[0].childNodes, function(node){
         if (!activeOnly) {
           return node.value;
@@ -94,7 +94,7 @@ describe('components/common/filter', function() {
       }
     };
     this.component = this.renderComponent(props);
-    var selectNode = ReactDOM.findDOMNode($R(this.component).find('select').components[1]);
+    var selectNode = $R(this.component).find('select').components[1];
     var options = _.map(selectNode.childNodes, function(node) {
       return node.value;
     });
