@@ -60,26 +60,34 @@ describe('components/common/notice', function() {
       });
     });
   });
+
   describe('closing', function () {
+    beforeEach(function() {
+      var notice = { type: 'error', text: 'some error' };
+      this.component = TestUtils.renderIntoDocument(<Notice notice={notice} />);
+    });
+
     it('can be closed', function () {
-      var notice = { type: 'error', text: 'some error' };
-      var component = component = TestUtils.renderIntoDocument(<Notice notice={notice} />);
-      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(component, 'close'));
-      assert.include(ReactDOM.findDOMNode(component).className, 'hide');
+      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(this.component, 'close'));
+
+      assert.include(ReactDOM.findDOMNode(this.component).className, 'hide');
     });
+
     it('shows itself again after new props are passed in', function () {
+      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(this.component, 'close'));
+      assert.include(ReactDOM.findDOMNode(this.component).className, 'hide');
+
       var notice = { type: 'error', text: 'some error' };
-      var component = component = TestUtils.renderIntoDocument(<Notice notice={notice} />);
-      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(component, 'close'));
-      assert.include(ReactDOM.findDOMNode(component).className, 'hide');
-      component.setProps(notice);
-      assert.notInclude(ReactDOM.findDOMNode(component).className, 'hide');
+      this.component = TestUtils.renderIntoDocument(<Notice notice={notice} />);
+
+      assert.notInclude(ReactDOM.findDOMNode(this.component).className, 'hide');
     });
+
     it('calls the closeCallback', function () {
-      var notice = { type: 'error', text: 'some error' };
       var closeCallback = sinon.stub();
-      var component = component = TestUtils.renderIntoDocument(<Notice notice={notice} closeCallback={closeCallback} />);
-      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(component, 'close'));
+      this.component = TestUtils.renderIntoDocument(<Notice notice={notice} closeCallback={closeCallback} />);
+      TestUtils.Simulate.click(TestUtils.findRenderedDOMComponentWithClass(this.component, 'close'));
+
       assert.isTrue(closeCallback.calledOnce);
     });
   });

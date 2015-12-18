@@ -4,7 +4,6 @@ var _ = require('lodash');
 var sinon = require('sinon');
 var Chart = require('../../../../../client/js/app/components/explorer/visualization/chart.js');
 var React = require('react');
-var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var ExplorerUtils = require('../../../../../client/js/app/utils/ExplorerUtils');
 var TestHelpers = require('../../../../support/TestHelpers');
@@ -23,7 +22,7 @@ describe('components/explorer/visualization/chart', function() {
     });
     it('has a get started message when there is no query yet', function(){
       var message = "Let's go exploring!";
-      assert.equal(ReactDOM.findDOMNode(this.component.refs.notice).textContent, message);
+      assert.equal(this.component.refs.notice.textContent, message);
     });
     it('shows the correct message about email extractions ', function () {
       this.model.query.analysis_type = 'extraction';
@@ -31,7 +30,7 @@ describe('components/explorer/visualization/chart', function() {
       this.model.response = { result: 10, success: true };
       this.component = TestUtils.renderIntoDocument(<Chart model={this.model} dataviz={this.dataviz} />);
       var message = "Email extractions don't have visualizations.";
-      assert.equal(ReactDOM.findDOMNode(this.component.refs.notice).textContent, message);
+      assert.equal(this.component.refs.notice.textContent, message);
     });
   });
 });

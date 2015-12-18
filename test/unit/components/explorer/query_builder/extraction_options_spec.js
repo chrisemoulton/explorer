@@ -26,15 +26,15 @@ describe('components/explorer/query_builder/extraction_options', function() {
 
   describe('an email extraction', function () {
     it('shows the email field', function() {
-      this.component.setProps({
-        isEmail: true
-      });
+      var props = _.assign({}, this.component.props, { isEmail: true });
+      this.component = TestHelpers.renderComponent(ExtractionOptions, props);
+
       assert.lengthOf($R(this.component).find('input[name="email"]').components, 1);
     });
     it('shows the latest field', function() {
-      this.component.setProps({
-        isEmail: true
-      });
+      var props = _.assign({}, this.component.props, { isEmail: true });
+      this.component = TestHelpers.renderComponent(ExtractionOptions, props);
+
       assert.lengthOf($R(this.component).find('LatestField').components, 1);
     });
   });

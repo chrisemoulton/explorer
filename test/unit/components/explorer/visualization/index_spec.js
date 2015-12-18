@@ -40,7 +40,7 @@ describe('components/explorer/visualization/index', function() {
     this.component = this.renderComponent();
 
     this.getOptionsFromComponent = function(component) {
-      var chartTypeSelect = this.component.refs['chart-type'].refs.select.getDOMNode();
+      var chartTypeSelect = this.component.refs['chart-type'].refs.select;
       var optionNodes = chartTypeSelect.childNodes;
       return _.map(optionNodes, function(optionNode) {
         return optionNode.textContent;
@@ -86,13 +86,13 @@ describe('components/explorer/visualization/index', function() {
       this.model.result = 50;
       this.model.loading = false;
       this.component.forceUpdate();
-      assert.isFalse(this.component.refs['chart-type'].refs.select.getDOMNode().disabled);
+      assert.isFalse(this.component.refs['chart-type'].refs.select.disabled);
     });
 
     it('is disabled when the model is actively loading', function(){
       this.model.loading = true;
       this.component.forceUpdate();
-      assert.isTrue(this.component.refs['chart-type'].refs.select.getDOMNode().disabled);
+      assert.isTrue(this.component.refs['chart-type'].refs.select.disabled);
     });
 
   });
@@ -107,7 +107,7 @@ describe('components/explorer/visualization/index', function() {
       this.component.forceUpdate();
       var selectField = this.component.refs['chart-type'].refs.select;
 
-      assert.equal(selectField.props.value, 'metric');
+      assert.equal(selectField.value, 'metric');
     });
   });
 

@@ -42,7 +42,7 @@ describe('components/explorer/query_builder/funnels/funnel_builder', function() 
       steps: [ TestHelpers.createStep() ]
     }));
     var stub = sinon.stub(ExplorerActions, 'addStep');
-    TestUtils.Simulate.click(ReactDOM.findDOMNode($R(this.component).find('.add-step').components[0]));
+    TestUtils.Simulate.click($R(this.component).find('.add-step').components[0]);
     assert.isTrue(stub.calledOnce);
     ExplorerActions.addStep.restore();
   });
@@ -52,7 +52,7 @@ describe('components/explorer/query_builder/funnels/funnel_builder', function() 
       steps: [ TestHelpers.createStep() ]
     }));
     var stub = sinon.stub(ExplorerActions, 'setStepActive');
-    TestUtils.Simulate.click(ReactDOM.findDOMNode($R(this.component).find('li .step-header').components[0]));
+    TestUtils.Simulate.click($R(this.component).find('li .step-header').components[0]);
     assert.isTrue(stub.calledOnce);
     ExplorerActions.setStepActive.restore();
   });
@@ -62,7 +62,7 @@ describe('components/explorer/query_builder/funnels/funnel_builder', function() 
       steps: [ _.assign(TestHelpers.createStep(), { active: true }) ]
     }));
     var stub = sinon.stub(ExplorerActions, 'updateStep');
-    TestUtils.Simulate.click(ReactDOM.findDOMNode($R(this.component).find('li .step-header').components[0]));
+    TestUtils.Simulate.click($R(this.component).find('li .step-header').components[0]);
     assert.isTrue(stub.calledWith('abc123', 0, { active: false }));
     ExplorerActions.updateStep.restore();
   });

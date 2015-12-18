@@ -37,7 +37,7 @@ describe('components/common/timeframe', function() {
     });
 
     it('has the relative tab selected by default', function(){
-      var relativeTab = TestUtils.findRenderedDOMComponentWithTag(this.component, 'ul').getDOMNode().childNodes[0];
+      var relativeTab = TestUtils.findRenderedDOMComponentWithTag(this.component, 'ul').childNodes[0];
       assert.isTrue(relativeTab.classList.contains('active'));
     });
 
@@ -55,7 +55,7 @@ describe('components/common/timeframe', function() {
 
     describe('absolute_picker', function () {
       it('clicking the absolute tab updates the model to an absolute timeframe', function () {
-        this.absoluteTimeframeLink = TestUtils.findRenderedDOMComponentWithClass(this.component, 'absolute-tab').getDOMNode();
+        this.absoluteTimeframeLink = TestUtils.findRenderedDOMComponentWithClass(this.component, 'absolute-tab');
         TestUtils.Simulate.click(this.absoluteTimeframeLink);
         assert.strictEqual(this.handleChangeStub.getCall(0).args[0], 'time')
         assert.deepEqual(this.handleChangeStub.getCall(0).args[1], {
@@ -67,7 +67,7 @@ describe('components/common/timeframe', function() {
 
     describe('relative_picker', function () {
       it('clicking the relative tab updates the model to a relative timeframe', function () {
-        this.relativeTimeframeLink = TestUtils.findRenderedDOMComponentWithClass(this.component, 'relative-tab').getDOMNode();
+        this.relativeTimeframeLink = TestUtils.findRenderedDOMComponentWithClass(this.component, 'relative-tab');
         TestUtils.Simulate.click(this.relativeTimeframeLink);
         assert.strictEqual(this.handleChangeStub.getCall(0).args[0], 'time')
         assert.deepEqual(this.handleChangeStub.getCall(0).args[1], {

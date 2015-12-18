@@ -37,11 +37,13 @@ describe('components/common/react_select', function() {
 
   describe('search', function () {
     it('searches for items case insensitive', function () {
-      this.component.setProps({ items: ['ONE', 'TWO', 'THREE'] });
+      var propsStep1 = _.assign({}, this.component.props, { items: ['ONE', 'TWO', 'THREE'], value: 'one' });
+      this.component = TestHelpers.renderComponent(ReactSelect, propsStep1);
       this.component.setState({ initialFocus: false });
-      TestUtils.Simulate.focus(ReactDOM.findDOMNode(this.component.refs.input));
-      TestUtils.Simulate.change(ReactDOM.findDOMNode(this.component.refs.input));
-      this.component.setProps({ value: 'one' });
+
+      TestUtils.Simulate.focus(this.component.refs.input);
+      TestUtils.Simulate.change(this.component.refs.input);
+
       var listItems = _.map(ReactDOM.findDOMNode(this.component.refs.list).childNodes, function(item) {
         return item.textContent;
       });
